@@ -10,6 +10,8 @@ use Mix.Config
 config :zeh_challenge,
   ecto_repos: [ZehChallenge.Repo]
 
+config :zeh_challenge, ZehChallenge.Repo, types: ZehChallenge.PostgisTypes
+
 # Configures the endpoint
 config :zeh_challenge, ZehChallengeWeb.Endpoint,
   url: [host: "localhost"],
@@ -25,6 +27,8 @@ config :logger, :console,
 
 # Use Jason for JSON parsing in Phoenix
 config :phoenix, :json_library, Jason
+
+config :geo_postgis, :json_library, Jason
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
