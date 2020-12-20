@@ -1,11 +1,10 @@
 use Mix.Config
 
+database_url = "#{System.get_env("DATABASE_URL")}_#{Mix.env()}"
+
 # Configure your database
 config :zeh_challenge, ZehChallenge.Repo,
-  username: "postgres",
-  password: "postgres",
-  database: "zeh_challenge_dev",
-  hostname: "localhost",
+  url: database_url,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 
