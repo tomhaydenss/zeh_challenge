@@ -33,6 +33,9 @@ defmodule ZehChallenge.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
+      {:absinthe, "~> 1.5"},
+      {:absinthe_error_payload, "~> 1.0"},
+      {:absinthe_plug, "~> 1.5"},
       {:phoenix, "~> 1.5.7"},
       {:phoenix_ecto, "~> 4.1"},
       {:ecto_sql, "~> 3.4"},

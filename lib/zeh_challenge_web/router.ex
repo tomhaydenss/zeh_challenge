@@ -19,10 +19,15 @@ defmodule ZehChallengeWeb.Router do
     get "/", PageController, :index
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", ZehChallengeWeb do
-  #   pipe_through :api
-  # end
+  scope "/api" do
+    pipe_through :api
+
+    forward("/graphql", Absinthe.Plug, schema: ZehChallengeWeb.Schema)
+
+    if Mix.env() == :dev do
+      forward("/graphiql", Absinthe.Plug.GraphiQL, schema: ZehChallengeWeb.Schema)
+    end
+  end
 
   # Enables LiveDashboard only for development
   #
