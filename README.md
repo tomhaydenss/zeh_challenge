@@ -10,6 +10,10 @@ First we need to build our Docker image:
 
     $ docker-compose build
 
+And then get the project dependencies:
+
+    $ docker-compose run zeh_challenge_api mix deps.get
+
 After that we need to create and migrate the database (it should be executed once):
 
     $ docker-compose run zeh_challenge_api mix ecto.setup
