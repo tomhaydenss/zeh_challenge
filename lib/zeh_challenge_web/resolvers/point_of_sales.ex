@@ -2,12 +2,17 @@ defmodule ZehChallengeWeb.Resolvers.PointOfSales do
   alias ZehChallenge.PointOfSales
 
   def get_partner(_parent, %{id: id}, _resolution) do
-    case PointOfSales.get_partner(id) do
-      nil ->
-        {:error, "Partner ID #{id} not found"}
+    with {:ok, uuid} <- Ecto.UUID.cast(id) do
+      case PointOfSales.get_partner(uuid) do
+        nil ->
+          {:error, "Partner ID #{id} not found"}
 
-      partner ->
-        {:ok, partner}
+        partner ->
+          {:ok, partner}
+      end
+    else
+      :error ->
+        {:error, "Invalid value for the given Partner ID"}
     end
   end
 

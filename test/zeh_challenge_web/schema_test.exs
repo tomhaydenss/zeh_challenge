@@ -200,6 +200,24 @@ defmodule ZehChallengeWeb.SchemaTest do
              } = body
     end
 
+    test "with invalid param id", %{conn: conn} do
+      body =
+        conn
+        |> send_get_partner_request("any-value")
+        |> json_response(200)
+
+      assert %{
+               "data" => %{"partner" => nil},
+               "errors" => [
+                 %{
+                   "locations" => _,
+                   "message" => "Invalid value for the given Partner ID",
+                   "path" => ["partner"]
+                 }
+               ]
+             } = body
+    end
+
     defp send_get_partner_request(conn, id) do
       post(conn, "/api/graphql", %{
         "query" => @partner_query,
